@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".LevelTwoGame">
+
+    <TextView
+        android:id="@+id/levelTwoGuideTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/circle_game_instruction_txt"
+        android:textSize="8pt"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/levelTwoView"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <com.example.drawappofficial.views.DrawView
+        android:id="@+id/levelTwoView"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:elevation="5dp"
+        app:layout_constraintTop_toBottomOf="@id/levelTwoGuideTxt"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/idLevelTwoBtn"/>
+
+    <Button
+        android:id="@+id/clearLevelTwoBtn"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="@string/clear_txt"
+        android:textSize="9pt"
+        android:textStyle="bold"
+        android:background="@color/wrong"
+        android:textColor="#ffffff"
+        android:elevation="5dp"
+        app:layout_constraintRight_toLeftOf="@id/idLevelTwoBtn"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/levelTwoView"
+        app:layout_constraintBottom_toTopOf="@id/compLevelTwoTryTxt"/>
+
+    <Button
+        android:id="@+id/idLevelTwoBtn"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:text="@string/id_txt"
+        android:textSize="9pt"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:background="@color/correct"
+        android:elevation="5dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/clearLevelTwoBtn"
+        app:layout_constraintTop_toBottomOf="@id/levelTwoView"
+        app:layout_constraintBottom_toTopOf="@id/compLevelTwoPointTxt"/>
+
+    <TextView
+        android:id="@+id/compLevelTwoTryTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tries_game_txt"
+        android:textColor="#ffffff"
+        android:textSize="10pt"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/compLevelTwoPointTxt"
+        app:layout_constraintTop_toBottomOf="@id/idLevelTwoBtn" />
+
+    <TextView
+        android:id="@+id/compLevelTwoPointTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/point_game_txt"
+        android:textSize="10pt"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/idLevelTwoBtn"
+        app:layout_constraintLeft_toRightOf="@id/compLevelTwoTryTxt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+</android.support.constraint.ConstraintLayout>

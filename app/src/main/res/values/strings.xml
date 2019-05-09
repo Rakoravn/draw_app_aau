@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">DrawAppOfficial</string>
+    <string name="continue_string">Fortsæt</string>
+    <string name="circle_info_text">På billedet ses tre eksempler på en cirkel. En cirkel kan ofte ligne en fodbold, et ur eller en pizza.</string>
+    <string name="square_info_text">På billedet ses tre eksempler på en firkant. En firkant kan ofte ligne en dør, en kasse eller et fjernsyn.</string>
+    <string name="trapez_info_text">På billedet ses tre eksempler på en trapez. En trapez kan ofte ligne en popcorn beholder, en taske eller en båd.</string>
+    <string name="triangle_info_text">På billedet ses tre eksempler på en trekant. En trekant kan ofte ligne et juletræ, et tag på et hus eller en pyramide.</string>
+    <string name="triangle_game_progress_text">0/3 TREKANTER TEGNET</string>
+    <string name="triangle_game_instruction_text">TEGN EN TREKANT 3 GANGE</string>
+    <string name="clear_txt">RYD</string>
+    <string name="id_txt">CHECK</string>
+    <string name="trapez_game_instruction_txt">TEGN EN TRAPEZ 3 GANGE</string>
+    <string name="trapez_game_progress_txt">0/3 TRAPEZER TEGNET</string>
+    <string name="square_game_progress_txt">0/3 FIRKANTER TEGNET</string>
+    <string name="square_game_instruction_txt">TEGN EN FIRKANT 3 GANGE</string>
+    <string name="circle_game_instruction_txt">TEGN EN CIRKEL 3 GANGE</string>
+    <string name="circles_game_progress_txt">0/3 CIRKLER TEGNET</string>
+    <string name="point_game_txt">Point: 100</string>
+    <string name="tries_game_txt">1/20</string>
+</resources>

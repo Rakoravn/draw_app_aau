@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".LevelTwoQuiz">
+
+    <TextView
+        android:id="@+id/questionTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="10pt"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/quizImage"/>
+
+    <ImageView
+        android:id="@+id/quizImage"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:elevation="5dp"
+        android:background="@color/palette_bg"
+        app:layout_constraintTop_toBottomOf="@id/questionTxt"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/answerA" />
+
+    <Button
+        android:id="@+id/answerA"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:background="@drawable/button_custom"
+        android:elevation="5dp"
+        android:textColor="#ffffff"
+        app:layout_constraintTop_toBottomOf="@+id/quizImage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/answerC"
+        app:layout_constraintRight_toLeftOf="@id/answerB"/>
+
+    <Button
+        android:id="@+id/answerB"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:background="@drawable/button_custom"
+        android:elevation="5dp"
+        android:textColor="#ffffff"
+        app:layout_constraintTop_toBottomOf="@+id/quizImage"
+        app:layout_constraintBottom_toTopOf="@id/answerD"
+        app:layout_constraintLeft_toRightOf="@id/answerA"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
+        android:id="@+id/answerC"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:background="@drawable/button_custom"
+        android:elevation="5dp"
+        android:textColor="#ffffff"
+        app:layout_constraintTop_toBottomOf="@id/answerA"
+        app:layout_constraintBottom_toTopOf="@id/pointTxt"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/answerD"/>
+
+    <Button
+        android:id="@+id/answerD"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:background="@drawable/button_custom"
+        android:elevation="5dp"
+        android:textColor="#ffffff"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/triesTxt"
+        app:layout_constraintLeft_toRightOf="@id/answerC"
+        app:layout_constraintTop_toBottomOf="@id/answerB"/>
+
+    <TextView
+        android:id="@+id/triesTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tries_game_txt"
+        android:textSize="10pt"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/pointTxt"
+        app:layout_constraintTop_toBottomOf="@id/answerC"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/pointTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/point_game_txt"
+        android:textSize="10pt"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/triesTxt"
+        app:layout_constraintTop_toBottomOf="@id/answerD"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

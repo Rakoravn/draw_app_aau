@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".LevelOne">
+
+    <ImageView
+        android:id="@+id/arrowOne"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/left_arrow"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/levelOneTriangleBtn"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/levelOneSquareBtn" />
+
+    <Button
+        android:id="@+id/levelOneSquareBtn"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:text="Firkant"
+        android:textSize="12pt"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:background="@drawable/button_custom"
+        android:elevation="5dp"
+        app:layout_constraintLeft_toRightOf="@id/arrowOne"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/levelOneTriangleBtn"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
+        android:id="@+id/levelOneTriangleBtn"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:text="Trekant"
+        android:textSize="12pt"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:background="@drawable/button_custom"
+        android:elevation="5dp"
+        app:layout_constraintRight_toLeftOf="@id/arrowTwo"
+        app:layout_constraintTop_toBottomOf="@id/levelOneSquareBtn"
+        app:layout_constraintBottom_toTopOf="@id/levelOneCircleBtn"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <ImageView
+        android:id="@+id/arrowTwo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/right_arrow"
+        app:layout_constraintTop_toBottomOf="@id/levelOneSquareBtn"
+        app:layout_constraintBottom_toTopOf="@id/levelOneCircleBtn"
+        app:layout_constraintLeft_toRightOf="@id/levelOneTriangleBtn"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <ImageView
+        android:id="@+id/arrowThree"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/left_arrow"
+        app:layout_constraintTop_toBottomOf="@id/levelOneTriangleBtn"
+        app:layout_constraintBottom_toTopOf="@id/levelOneTrapezBtn"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/levelOneCircleBtn" />
+
+    <Button
+        android:id="@+id/levelOneCircleBtn"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:text="Cirkel"
+        android:textSize="12pt"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:background="@drawable/button_custom"
+        android:elevation="5dp"
+        app:layout_constraintLeft_toRightOf="@id/arrowThree"
+        app:layout_constraintTop_toBottomOf="@id/levelOneTriangleBtn"
+        app:layout_constraintBottom_toTopOf="@id/levelOneTrapezBtn"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
+        android:id="@+id/levelOneTrapezBtn"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:text="Trapez"
+        android:textSize="12pt"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:background="@drawable/button_custom"
+        android:elevation="5dp"
+        app:layout_constraintRight_toLeftOf="@id/arrowFour"
+        app:layout_constraintTop_toBottomOf="@id/levelOneCircleBtn"
+        app:layout_constraintBottom_toTopOf="@id/levelOneBackBtn"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <ImageView
+        android:id="@+id/arrowFour"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/levelOneCircleBtn"
+        app:layout_constraintBottom_toTopOf="@id/levelOneBackBtn"
+        app:layout_constraintLeft_toRightOf="@id/levelOneTrapezBtn"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
+        android:id="@+id/levelOneBackBtn"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="Tilbage"
+        android:textSize="12pt"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:background="@drawable/back_button_shape"
+        android:elevation="5dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/levelOneTrapezBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

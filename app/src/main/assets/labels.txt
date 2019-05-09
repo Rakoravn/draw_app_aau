@@ -1,0 +1,4 @@
+cirkel
+firkant
+trekant
+trapez
