@@ -149,8 +149,10 @@ public class LevelTwoGame extends Activity implements View.OnClickListener, View
             drawView.invalidate();
 
             if (res.getLabel().equals(shape.toLowerCase())) {
-                classBtn.setText("");
+                //classBtn.setText("");
                 //correctAnim.start();
+
+                Toast.makeText(this, "Korrekt!", Toast.LENGTH_SHORT).show();
 
                 tries += 1;
                 triesTxt.setText(tries + "/20");
@@ -164,27 +166,24 @@ public class LevelTwoGame extends Activity implements View.OnClickListener, View
                 classBtn.setEnabled(false);
 
                 if(tries >= 20){
-                    Intent intent = new Intent(this, MainActivity.class);
-                    intent.putExtra("pointVar", points);
-                    startActivity(intent);
-                } else {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            toQuestionActivity();
+                            Intent intent = new Intent(LevelTwoGame.this, MainActivity.class);
+                            intent.putExtra("pointVar", points);
+                            startActivity(intent);
                         }
                     }, 700);
+                } else {
+                    toQuestionActivity();
                 }
 
 
             } else {
-                //Toast.makeText(this, "Prøv igen", Toast.LENGTH_SHORT).show();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        toQuestionActivity();
-                    }
-                }, 700);
+                Toast.makeText(this, "Forkert", Toast.LENGTH_SHORT).show();
+                tries += 1;
+                triesTxt.setText(tries + "/20");
+                toQuestionActivity();
             }
 
         } else if (v.getId() == R.id.clearLevelTwoBtn){
@@ -197,11 +196,16 @@ public class LevelTwoGame extends Activity implements View.OnClickListener, View
     }
 
     private void toQuestionActivity() {
-        Intent intent = new Intent(this, LevelTwoQuiz.class);
-        intent.putExtra("quizListVar2", quizNumsTwo);
-        intent.putExtra("pointVar", points);
-        intent.putExtra("triesVar", tries);
-        startActivity(intent);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(LevelTwoGame.this, LevelTwoQuiz.class);
+                intent.putExtra("quizListVar2", quizNumsTwo);
+                intent.putExtra("pointVar", points);
+                intent.putExtra("triesVar", tries);
+                startActivity(intent);
+            }
+        }, 700);
     }
 
     @Override

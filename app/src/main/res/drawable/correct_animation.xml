@@ -3,105 +3,105 @@
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_one"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_two"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_three"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_four"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_five"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_six"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_seven"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_eight"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_nine"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_ten"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_eleven"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_twelve"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_thirteen"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_fourteen"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_fifteen"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_sixteen"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_seventeen"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_eighteen"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_nineteen"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_twenty"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_twentyone"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_twentytwo"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_twentythree"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_twentyfour"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_twentyfive"
-        android:duration="20"/>
+        android:duration="5"/>
 
     <item
         android:drawable="@drawable/ic_check_correct_animation_twentysix"
-        android:duration="100"/>
+        android:duration="5000"/>
 </animation-list>
