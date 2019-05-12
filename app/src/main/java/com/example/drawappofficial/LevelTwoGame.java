@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.graphics.PointF;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -31,8 +32,8 @@ public class LevelTwoGame extends Activity implements View.OnClickListener, View
     private static final int PIXEL_WIDTH = 100;
 
     // ui elements
+    private TextView pointTxt, triesTxt, questTxt, timeTxt;
     private Button clearBtn, classBtn;
-    private TextView pointTxt, triesTxt, questTxt;
     private Classifier mClassifiers;
 
     final Handler handler = new Handler();
@@ -43,10 +44,13 @@ public class LevelTwoGame extends Activity implements View.OnClickListener, View
     private PointF mTmpPoint = new PointF();
 
     private int tries, points;
+    private long timeLeft;
     private String shape;
 
     private float mLastX;
     private float mLastY;
+
+    private CountDownTimer countDownTimer;
 
     AnimationDrawable correctAnim;
 
@@ -82,7 +86,7 @@ public class LevelTwoGame extends Activity implements View.OnClickListener, View
 
         triesTxt = (TextView) findViewById(R.id.compLevelTwoTryTxt);
         tries = getIntent().getExtras().getInt("triesVar");
-        triesTxt.setText(tries + "/20");
+        triesTxt.setText(tries + "");
 
         pointTxt = (TextView) findViewById(R.id.compLevelTwoPointTxt);
         points = getIntent().getExtras().getInt("pointVar");
@@ -92,11 +96,37 @@ public class LevelTwoGame extends Activity implements View.OnClickListener, View
         shape = getIntent().getExtras().getString("shapeVar");
         questTxt.setText("TEGN EN " + shape.toUpperCase());
 
-        quizNumsTwo = getIntent().getExtras().getIntegerArrayList("quizListVar");
+        timeTxt = (TextView) findViewById(R.id.timeTxt2);
+        timeLeft = getIntent().getExtras().getLong("timeLeftVar");
 
-        System.out.println(quizNumsTwo.size());
-        System.out.println(quizNumsTwo.get(0));
-        System.out.println(quizNumsTwo);
+        countDownTimer = new CountDownTimer(timeLeft, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                if(millisUntilFinished/1000 >= 60){
+                    int minutes = (int) millisUntilFinished / 60000;
+                    long seconds = millisUntilFinished - (minutes * 60000);
+
+                    timeTxt.setText(minutes + "m " + seconds / 1000 + "s");
+                    timeLeft = millisUntilFinished;
+                } else {
+                    timeTxt.setText(millisUntilFinished / 1000 + "s");
+                    timeLeft = millisUntilFinished;
+                }
+            }
+
+            public void onFinish() {
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(LevelTwoGame.this, MainActivity.class);
+                        intent.putExtra("pointVar", points);
+                        startActivity(intent);
+                    }
+                }, 700);
+            }
+        }.start();
+
+        quizNumsTwo = getIntent().getExtras().getIntegerArrayList("quizListVar");
 
         loadModel();
     }
@@ -137,6 +167,10 @@ public class LevelTwoGame extends Activity implements View.OnClickListener, View
 
     @Override
     public void onClick(View v) {
+
+        tries += 1;
+        triesTxt.setText(tries + "");
+
         if (v.getId() == R.id.idLevelTwoBtn){
 
             float pixels[] = drawView.getPixelData();
@@ -154,9 +188,6 @@ public class LevelTwoGame extends Activity implements View.OnClickListener, View
 
                 Toast.makeText(this, "Korrekt!", Toast.LENGTH_SHORT).show();
 
-                tries += 1;
-                triesTxt.setText(tries + "/20");
-
                 points += 50;
                 pointTxt.setText("Points: " + points);
 
@@ -165,24 +196,10 @@ public class LevelTwoGame extends Activity implements View.OnClickListener, View
                 clearBtn.setEnabled(false);
                 classBtn.setEnabled(false);
 
-                if(tries >= 20){
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            Intent intent = new Intent(LevelTwoGame.this, MainActivity.class);
-                            intent.putExtra("pointVar", points);
-                            startActivity(intent);
-                        }
-                    }, 700);
-                } else {
-                    toQuestionActivity();
-                }
-
+                toQuestionActivity();
 
             } else {
                 Toast.makeText(this, "Forkert", Toast.LENGTH_SHORT).show();
-                tries += 1;
-                triesTxt.setText(tries + "/20");
                 toQuestionActivity();
             }
 
@@ -199,10 +216,13 @@ public class LevelTwoGame extends Activity implements View.OnClickListener, View
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                countDownTimer.cancel();
+                countDownTimer = null;
                 Intent intent = new Intent(LevelTwoGame.this, LevelTwoQuiz.class);
                 intent.putExtra("quizListVar2", quizNumsTwo);
                 intent.putExtra("pointVar", points);
                 intent.putExtra("triesVar", tries);
+                intent.putExtra("timeLeftVar", timeLeft);
                 startActivity(intent);
             }
         }, 700);

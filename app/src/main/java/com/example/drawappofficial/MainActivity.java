@@ -24,15 +24,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         pointTxt = (TextView) findViewById(R.id.mainMenuPoint);
 
-        //Check whether a points variable have been passed from other activity.
-        //If not, set points to 0, else set points to value of given variable "pointVar"
+        //Check whether a points variable have been passed from other activities.
         if (getIntent().getExtras() != null){
             points = getIntent().getExtras().getInt("pointVar");
         } else {
             points = 0;
         }
 
-        pointTxt.setText("Points: " + points);
+        pointTxt.setText("Point: " + points);
 
         levelOne = (Button) findViewById(R.id.level1Btn);
         levelOne.setOnClickListener(this);

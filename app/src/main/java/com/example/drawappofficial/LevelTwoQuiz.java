@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.ColorLong;
@@ -27,7 +28,7 @@ import java.util.concurrent.Delayed;
 
 public class LevelTwoQuiz extends Activity implements View.OnClickListener{
 
-    private TextView questionTV, triesTV, pointTV;
+    private TextView questionTV, triesTV, pointTV, timeTV;
     private Button firstAnswer, secondAnswer, thirdAnswer, fourthAnswer;
     private ImageView quizIm;
 
@@ -36,7 +37,10 @@ public class LevelTwoQuiz extends Activity implements View.OnClickListener{
     private String shape = "";
 
     private String rightAnswer;
+    private long timeLeft = 240000 ;
     private int points, tries;
+
+    private CountDownTimer countDownTimer;
 
     private ArrayList<ArrayList<String>> quizArray = new ArrayList<>();
     private ArrayList<Button> quizButtons = new ArrayList<>();
@@ -95,8 +99,10 @@ public class LevelTwoQuiz extends Activity implements View.OnClickListener{
 
         quizIm = (ImageView) findViewById(R.id.quizImage);
         questionTV = (TextView) findViewById(R.id.questionTxt);
+
         triesTV = (TextView) findViewById(R.id.triesTxt);
         pointTV = (TextView) findViewById(R.id.pointTxt);
+        timeTV = (TextView) findViewById(R.id.timeTxt);
 
         //Check if a point variable and a tries variable have been passed to the activity
         if (getIntent().getExtras() == null){
@@ -105,10 +111,11 @@ public class LevelTwoQuiz extends Activity implements View.OnClickListener{
         } else {
             tries = getIntent().getExtras().getInt("triesVar");
             points = getIntent().getExtras().getInt("pointVar");
+            timeLeft = getIntent().getExtras().getLong("timeLeftVar");
             quizNums = getIntent().getExtras().getIntegerArrayList("quizListVar2");
         }
 
-        triesTV.setText(tries + "/20");
+        triesTV.setText(tries + "");
         pointTV.setText("Point: " + points);
 
         firstAnswer = (Button) findViewById(R.id.answerA);
@@ -122,6 +129,34 @@ public class LevelTwoQuiz extends Activity implements View.OnClickListener{
 
         fourthAnswer = (Button) findViewById(R.id.answerD);
         fourthAnswer.setOnClickListener(this);
+
+        countDownTimer = new CountDownTimer(timeLeft, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                if(millisUntilFinished/1000 >= 60){
+                    int minutes = (int) millisUntilFinished / 60000;
+                    long seconds = millisUntilFinished - (minutes * 60000);
+
+                    timeTV.setText(minutes + "m " + seconds / 1000 + "s");
+                    timeLeft = millisUntilFinished;
+
+                } else {
+                    timeTV.setText(millisUntilFinished / 1000 + "s");
+                    timeLeft = millisUntilFinished;
+                }
+            }
+
+            public void onFinish() {
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(LevelTwoQuiz.this, MainActivity.class);
+                        intent.putExtra("pointVar", points);
+                        startActivity(intent);
+                    }
+                }, 700);
+            }
+        }.start();
 
         //Add each question to a temporary array (tempArray)
         // and then add each line (iteration of question to the quizArray
@@ -217,25 +252,22 @@ public class LevelTwoQuiz extends Activity implements View.OnClickListener{
     }
 
     public void toQuestionPage(){
-        if (tries >= 20){
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("pointVar", points);
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent(this, LevelTwoGame.class);
-            intent.putExtra("quizListVar", quizNums);
-            intent.putExtra("pointVar", points);
-            intent.putExtra("triesVar", tries);
-            intent.putExtra("shapeVar", shape);
-            startActivity(intent);
-        }
+        countDownTimer.cancel();
+        countDownTimer = null;
+        Intent intent = new Intent(this, LevelTwoGame.class);
+        intent.putExtra("quizListVar", quizNums);
+        intent.putExtra("pointVar", points);
+        intent.putExtra("timeLeftVar", timeLeft);
+        intent.putExtra("triesVar", tries);
+        intent.putExtra("shapeVar", shape);
+        startActivity(intent);
     }
 
     @Override
     public void onClick(View v) {
 
         tries += 1;
-        triesTV.setText(tries + "/20");
+        triesTV.setText(tries + "");
 
         if (v.getId() == R.id.answerA){
             checkAnswer(v);
