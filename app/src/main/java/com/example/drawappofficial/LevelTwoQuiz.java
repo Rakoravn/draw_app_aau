@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.annotation.ColorLong;
 import android.support.v7.app.AppCompatActivity;
@@ -37,8 +38,9 @@ public class LevelTwoQuiz extends Activity implements View.OnClickListener{
     private String shape = "";
 
     private String rightAnswer;
-    private long timeLeft = 240000 ;
-    private int points, tries;
+    private long timeLeft = 180000 ;
+    private long lastClickTime = 0;
+    private int points, tries, triesCorrect;
 
     private CountDownTimer countDownTimer;
 
@@ -107,15 +109,23 @@ public class LevelTwoQuiz extends Activity implements View.OnClickListener{
         //Check if a point variable and a tries variable have been passed to the activity
         if (getIntent().getExtras() == null){
             tries = 0;
+            triesCorrect = 0;
             points = 0;
         } else {
             tries = getIntent().getExtras().getInt("triesVar");
+            triesCorrect = getIntent().getExtras().getInt("correctQuizVar");
             points = getIntent().getExtras().getInt("pointVar");
             timeLeft = getIntent().getExtras().getLong("timeLeftVar");
             quizNums = getIntent().getExtras().getIntegerArrayList("quizListVar2");
         }
 
-        triesTV.setText(tries + "");
+        if (quizNums.size() >= 18){
+            quizNums.clear();
+        }
+
+        System.out.println(quizNums.size());
+
+        triesTV.setText(triesCorrect + "/" + tries);
         pointTV.setText("Point: " + points);
 
         firstAnswer = (Button) findViewById(R.id.answerA);
@@ -151,6 +161,8 @@ public class LevelTwoQuiz extends Activity implements View.OnClickListener{
                     @Override
                     public void run() {
                         Intent intent = new Intent(LevelTwoQuiz.this, MainActivity.class);
+                        intent.putExtra("triesVar", tries);
+                        intent.putExtra("correctQuizVar", triesCorrect);
                         intent.putExtra("pointVar", points);
                         startActivity(intent);
                     }
@@ -226,6 +238,7 @@ public class LevelTwoQuiz extends Activity implements View.OnClickListener{
 
         if (btnTxt.equals(rightAnswer)){
             answerBtn.setBackgroundResource(R.drawable.button_shape_correct);
+            triesCorrect += 1;
 
             for (Button b : quizButtons){
                 if (b.getText() != answerBtn.getText()){
@@ -236,8 +249,10 @@ public class LevelTwoQuiz extends Activity implements View.OnClickListener{
             points += 50;
             pointTV.setText("Point: " + points);
             pointTV.setTextColor(getResources().getColor(R.color.correct));
+            triesTV.setText(triesCorrect + "/" + tries);
         } else {
             answerBtn.setBackgroundResource(R.drawable.button_shape_wrong);
+            triesTV.setText(triesCorrect + "/" + tries);
 
             for (Button b : quizButtons){
                 if (b.getText() == rightAnswer){
@@ -259,6 +274,7 @@ public class LevelTwoQuiz extends Activity implements View.OnClickListener{
         intent.putExtra("pointVar", points);
         intent.putExtra("timeLeftVar", timeLeft);
         intent.putExtra("triesVar", tries);
+        intent.putExtra("correctQuizVar", triesCorrect);
         intent.putExtra("shapeVar", shape);
         startActivity(intent);
     }
@@ -266,11 +282,19 @@ public class LevelTwoQuiz extends Activity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
+        if (SystemClock.elapsedRealtime() - lastClickTime < 1000) {
+            return;
+        }
+        lastClickTime = SystemClock.elapsedRealtime();
+        pressedOnClick(v);
+    }
+
+    private void pressedOnClick(View v) {
         tries += 1;
-        triesTV.setText(tries + "");
 
         if (v.getId() == R.id.answerA){
             checkAnswer(v);
+            v.setEnabled(false);
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {

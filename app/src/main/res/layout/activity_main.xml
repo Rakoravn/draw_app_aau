@@ -45,7 +45,19 @@
         android:textStyle="bold"
         android:textSize="12pt"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/mainMenuTries"
         app:layout_constraintTop_toBottomOf="@id/level2Btn"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/mainMenuTries"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:textSize="12pt"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/mainMenuPoint"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/level2Btn"/>
 </android.support.constraint.ConstraintLayout>

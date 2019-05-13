@@ -14,8 +14,8 @@ import java.lang.reflect.Type;
 public class MainActivity extends Activity implements View.OnClickListener {
 
     private Button levelOne, levelTwo;
-    private TextView pointTxt;
-    private int points;
+    private TextView pointTxt, triesTxt;
+    private int points, tries, triesCorrect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,15 +23,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
 
         pointTxt = (TextView) findViewById(R.id.mainMenuPoint);
+        triesTxt = (TextView) findViewById(R.id.mainMenuPoint);
 
         //Check whether a points variable have been passed from other activities.
         if (getIntent().getExtras() != null){
             points = getIntent().getExtras().getInt("pointVar");
+            tries = getIntent().getExtras().getInt("triesVar");
+            triesCorrect = getIntent().getExtras().getInt("correctQuizVar");
+
+            pointTxt.setText("Point: " + points);
+            triesTxt.setText(triesCorrect + "/" + tries);
         } else {
             points = 0;
+            tries = 0;
+            triesCorrect = 0;
         }
-
-        pointTxt.setText("Point: " + points);
 
         levelOne = (Button) findViewById(R.id.level1Btn);
         levelOne.setOnClickListener(this);
